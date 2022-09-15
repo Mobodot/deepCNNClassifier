@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open("README.md", "r", encoding="utf-8") as f:
@@ -25,5 +25,5 @@ setup(
         "Bug Tracker": f"https://github.com/{AUTHOR_NAME}/{SRC_REPO}/issues"
     },
     package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    packages=find_packages(where="src"),
 )
