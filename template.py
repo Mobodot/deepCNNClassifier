@@ -33,11 +33,14 @@ LIST_OF_PATHS = [
     "tests/unit/__init__.py",
     "requirements.txt",
     "requirements_dev.txt",
+    "dvc.yaml",
+    "params.yaml",
     "setup.cfg",
     "setup.py",
     "tox.ini",
     "pyproject.toml",
-    "init.sh"
+    "init.sh",
+    "research/trials.ipynb"
 ]
 
 
