@@ -131,3 +131,6 @@ dmypy.json
 # images
 *.jpg
 *.zip
+
+# vscode settings
+*.vscode
