@@ -48,7 +48,6 @@ def create_directories(path_to_dir: list, verbose=True):
         if verbose:
             logger.info(f"created directory at: {path}")
     
-    return ()
     
 @ensure_annotations
 def save_json(path: Path, data: dict):
