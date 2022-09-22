@@ -1,1 +1,5 @@
-key: val
+IMAGE_SIZE: [224,224,3]
+INCLUDE_TOP: False
+WEIGHTS: imagenet
+CLASSES: 2
+LEARNING_RATE: 0.01
