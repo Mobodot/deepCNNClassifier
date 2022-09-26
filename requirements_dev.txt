@@ -1,15 +1,16 @@
 tensorflow
 dvc
-pandas
+# pandas
 notebook
 numpy
-matplotlib
-seaborn
+# matplotlib
+# seaborn
 python-box==6.0.2
 pyYAML
 tqdm
 ensure==1.0.2
 joblib
+scipy
 -e .
 
 ## Dev requirements
