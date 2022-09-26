@@ -2,25 +2,31 @@ from deepClassifier import logger
 from deepClassifier.entity import PrepareBaseModelConfig
 from pathlib import Path
 import tensorflow as tf
+import os
 
 class PrepareBaseModel:
     def __init__(
         self, 
         prepare_base_model_config: PrepareBaseModelConfig):
             self.config = prepare_base_model_config
+            self._is_model_exists = False
             
     def get_base_model(self):
         logger.info("Trying to download VGG16 as base model...")
-        self.model = tf.keras.applications.vgg16.VGG16(
-            include_top=self.config.params_include_top,
-            weights=self.config.params_weights,
-            input_shape=self.config.params_image_size,
-        )
-        
-        self.save_model(
-            path=self.config.base_model_path,
-            model=self.model)
-        logger.info(f"Base model: [VGG16] saved at: [{self.config.base_model_path}]")
+        if os.path.split(self.config.base_model_path)[-1] != "base_model.h5":
+            self.model = tf.keras.applications.vgg16.VGG16(
+                include_top=self.config.params_include_top,
+                weights=self.config.params_weights,
+                input_shape=self.config.params_image_size,
+            )
+            
+            self.save_model(
+                path=self.config.base_model_path,
+                model=self.model)
+            logger.info(f"Base model: [VGG16] saved at: [{self.config.base_model_path}]")
+        else:
+            logger.info(f"Base model VGG16 already exists at: [{self.config.base_model_path}]")
+            self._is_model_exists = True
         
         
     @staticmethod
@@ -66,11 +72,16 @@ class PrepareBaseModel:
     
     def update_base_model(self):
         # newly added lines for getting basemodel
-        logger.info("Updating base model[VGG16] params...")
-        self.model = tf.keras.models.load_model(
-            self.config.base_model_path
-        )
         
+        if self._is_model_exists:
+            logger.info("loading base model...")
+            self.model = tf.keras.models.load_model(
+                self.config.base_model_path
+            )
+        else:
+            logger.info("Updating base model[VGG16] params...")
+            
+
         self.full_model = self._prepare_full_model(
             model=self.model,
             classes=self.config.params_classes,
