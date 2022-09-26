@@ -137,3 +137,6 @@ dmypy.json
 
 # models
 *.h5
+
+# artifacts
+artifacts/
